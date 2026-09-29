@@ -1,0 +1,177 @@
+{
+  "fictional": true,
+  "feature": {
+    "id": "91001",
+    "title": "Aurora Sync preview",
+    "comms_timeline": "2610",
+    "comms_writer": "Alex Example"
+  },
+  "sources": [
+    {
+      "id": "H1:work-item",
+      "body": "Aurora Sync preview is planned for release 2610. The release owner requests documentation."
+    },
+    {
+      "id": "H5:specification",
+      "body": "Aurora Sync lets administrators synchronize selected folders. Preview supports desktop clients version 5 or later. Mobile synchronization is out of scope."
+    },
+    {
+      "id": "H3:approval",
+      "body": "Product owner: I approve the preview release wording in the fixture draft. This is not general availability approval."
+    }
+  ],
+  "patch": {
+    "scope": {
+      "shipping": [
+        {
+          "claim": "Selected-folder synchronization for desktop preview",
+          "sources": [
+            "H5:specification"
+          ],
+          "confidence": "EXTRACTED"
+        }
+      ],
+      "out_of_scope": [
+        {
+          "claim": "Mobile synchronization",
+          "sources": [
+            "H5:specification"
+          ],
+          "confidence": "EXTRACTED"
+        },
+        {
+          "claim": "General availability",
+          "sources": [
+            "H5:specification"
+          ],
+          "confidence": "EXTRACTED"
+        }
+      ]
+    },
+    "facts": [
+      {
+        "field": "capability",
+        "value": "synchronize selected folders",
+        "sources": [
+          "H5:specification"
+        ],
+        "confidence": "EXTRACTED"
+      },
+      {
+        "field": "requirement",
+        "value": "desktop clients version 5 or later",
+        "sources": [
+          "H5:specification"
+        ],
+        "confidence": "EXTRACTED"
+      },
+      {
+        "field": "availability",
+        "value": "preview",
+        "sources": [
+          "H1:work-item",
+          "H5:specification"
+        ],
+        "confidence": "EXTRACTED"
+      }
+    ],
+    "sources": {
+      "reached": [
+        "H1",
+        "H3",
+        "H5",
+        "H8"
+      ],
+      "unavailable": [
+        {
+          "tag": "H7",
+          "reason": "Production rollout is not observed in this fixture."
+        }
+      ]
+    },
+    "open_questions": [
+      "Confirm the general-availability date before changing preview language."
+    ]
+  },
+  "articles": [
+    {
+      "path": "docs/sync-guide.md",
+      "author": "alex",
+      "topic": "how-to",
+      "title": "Configure folder synchronization",
+      "body": "Choose folders to synchronize."
+    },
+    {
+      "path": "docs/integrations.md",
+      "author": "casey",
+      "topic": "how-to",
+      "title": "Integrations",
+      "body": "Review external integrations."
+    },
+    {
+      "path": "docs/index.md",
+      "author": "alex",
+      "topic": "overview",
+      "title": "Product overview",
+      "body": "Start here."
+    },
+    {
+      "path": "docs/unassigned.md",
+      "author": null,
+      "topic": "how-to",
+      "title": "Advanced synchronization",
+      "body": "Ownership is intentionally unknown."
+    }
+  ],
+  "scan": [
+    {
+      "path": "docs/sync-guide.md",
+      "score": 95,
+      "ms_author": "alex",
+      "provenance": "EXTRACTED",
+      "concepts": [
+        "synchronization"
+      ]
+    },
+    {
+      "path": "docs/integrations.md",
+      "score": 88,
+      "ms_author": "casey",
+      "provenance": "EXTRACTED"
+    },
+    {
+      "path": "docs/index.md",
+      "score": 99,
+      "ms_author": "alex",
+      "ms_topic": "overview"
+    },
+    {
+      "path": "docs/unassigned.md",
+      "score": 91,
+      "provenance": "EXTRACTED"
+    }
+  ],
+  "graph": [
+    {
+      "path": "docs/sync-guide.md",
+      "blast": "direct",
+      "provenance": "EXTRACTED"
+    },
+    {
+      "path": "docs/integrations.md",
+      "blast": "direct",
+      "provenance": "EXTRACTED"
+    },
+    {
+      "path": "docs/index.md",
+      "blast": "direct",
+      "provenance": "EXTRACTED"
+    }
+  ],
+  "approval": {
+    "approved": true,
+    "role": "product-owner",
+    "source": "H3:approval",
+    "scope": "preview"
+  }
+}

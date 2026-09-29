@@ -1,0 +1,11 @@
+{
+  "description": "Fictional demo configuration. No external writes are implemented by this release.",
+  "simulation_only": true,
+  "test_mode_all_authors": false,
+  "writers": [
+    {"alias": "alex", "name": "Alex Example", "enabled": true},
+    {"alias": "morgan", "name": "Morgan Example", "enabled": true}
+  ],
+  "retiring_reassign": [],
+  "branch_pattern": "release-docs-{}"
+}
