@@ -38,11 +38,31 @@ class DemoTests(unittest.TestCase):
         self.assertFalse((self.base / "output/state/assignments-seen.json").exists())
 
     def test_missing_or_wrong_approval_never_stages(self):
-        self.fixture["approval"]["role"] = "observer"
-        report = demo.run(self.base / "held", self.write_fixture())
-        self.assertFalse(report["valid_fixture_approval"])
-        self.assertFalse((self.base / "held/staged").exists())
-        self.assertIn("approval", (self.base / "held/state/handoff-queue.md").read_text())
+        valid = self.fixture["approval"]
+        cases = {
+            "missing": None,
+            "null": None,
+            "empty": {},
+            "non-object": [],
+            "wrong-role": {**valid, "role": "observer"},
+            "wrong-scope": {**valid, "scope": "general-availability"},
+            "unknown-source": {**valid, "source": "unknown"},
+        }
+        for name, approval in cases.items():
+            with self.subTest(approval=name):
+                if name == "missing":
+                    self.fixture.pop("approval", None)
+                else:
+                    self.fixture["approval"] = approval
+                output = self.base / name
+                report = demo.run(output, self.write_fixture())
+                self.assertFalse(report["valid_fixture_approval"])
+                self.assertFalse((output / "staged").exists())
+                self.assertFalse((output / "approved-field.html").exists())
+                self.assertIn("approval", (output / "state/handoff-queue.md").read_text())
+                states = json.loads((output / "lifecycle.json").read_text())
+                self.assertEqual(states["awaiting_approval"]["overall_route"], "approval")
+                self.assertTrue((output / "index.html").is_file())
 
     def test_existing_output_is_untouched(self):
         target = self.base / "existing"

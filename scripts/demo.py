@@ -128,7 +128,9 @@ def run(output: Path, fixture: Path | None = None) -> dict:
                         f"{entry['path']}: {entry['reason']}")
     stage("Plan and prepare documentation", "Rechecked actual fixture ownership; copied only the permitted article into proposed-docs. Other owners, missing owners and overview pages became handoffs.")
 
-    approval = data["approval"]
+    approval = data.get("approval")
+    if not isinstance(approval, dict):
+        approval = {}
     valid_approval = (approval.get("approved") is True and approval.get("role") == "product-owner"
                       and approval.get("source") in {s["id"] for s in data["sources"]}
                       and approval.get("scope") == "preview")
